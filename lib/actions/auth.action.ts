@@ -131,36 +131,36 @@ export async function isAuthenticated() {
     return !!user;
 }
 
-// Get interview by userId
-export async function getInterviewByUserId(userId: string): Promise<Interview[] | null> {
-    const interviews = await db
-        .collection('interviews')
-        .where('userId','==', userId)
-        .orderBy('createdAt', 'desc')
-        .get();
-
-
-    return interviews.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data()
-    })) as Interview[];
-}
-
-// Get latest interviews
-export async function getLatestInterviews(params: GetLatestInterviewsParams): Promise<Interview[] | null> {
-    const { userId, limit = 20} = params;
-
-    const interviews = await db
-        .collection('interviews')
-        .orderBy('createdAt', 'desc')
-        .where('finalized','==', true)
-        .where('finalized','!=', userId)
-        .limit(limit)
-        .get();
-
-
-    return interviews.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data()
-    })) as Interview[];
-}
+// // Get interview by userId
+// export async function getInterviewByUserId(userId: string): Promise<Interview[] | null> {
+//     const interviews = await db
+//         .collection('interviews')
+//         .where('userId','==', userId)
+//         .orderBy('createdAt', 'desc')
+//         .get();
+//
+//
+//     return interviews.docs.map((doc) => ({
+//         id: doc.id,
+//         ...doc.data()
+//     })) as Interview[];
+// }
+//
+// // Get latest interviews
+// export async function getLatestInterviews(params: GetLatestInterviewsParams): Promise<Interview[] | null> {
+//     const { userId, limit = 20} = params;
+//
+//     const interviews = await db
+//         .collection('interviews')
+//         .orderBy('createdAt', 'desc')
+//         .where('finalized','==', true)
+//         .where('finalized','!=', userId)
+//         .limit(limit)
+//         .get();
+//
+//
+//     return interviews.docs.map((doc) => ({
+//         id: doc.id,
+//         ...doc.data()
+//     })) as Interview[];
+// }
